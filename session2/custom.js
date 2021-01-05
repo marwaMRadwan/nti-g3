@@ -75,9 +75,13 @@ addUserForm.addEventListener('submit', function(e){
 //console.log(user)
 
 
-
-
-
+x=[1,2,3,4,5,6]
+for(i=0;i<x.length;i++){
+  x[i]  i
+}
+x.forEach( (xelement, xindex)=>{
+  xelement  xindex
+} )
 
 
 

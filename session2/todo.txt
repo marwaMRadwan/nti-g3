@@ -1,0 +1,11 @@
+todo list: []
+tasks => title , type, description,   {}
+         status(default:false)
+type = t1, t2, t3
+
+add task
+show all tasks
+bounce: delete task
+    data =:> local storage
+
+

@@ -1,6 +1,6 @@
 const request = require('request')
 const getData = (callback)=>{
-    const url = `https://jsonplaceholder.typicode.com/photos`
+    const url = `http://newsapi.org/v2/top-headlines?country=eg&category=health&apiKey=702e9ad75b684b2ba13de7a0b5cf6ba3`
     request({ url, json:true }, (error, response )=>{
         if(error) {
             callback('el code 8lt', undefined)

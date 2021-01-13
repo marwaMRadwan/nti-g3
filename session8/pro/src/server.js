@@ -17,9 +17,15 @@ app.use(express.static(publicDirectory))
 
 app.get('', (req, res)=>{
   getapidata( ( error , data ) => {
-    if(error) pageData = error
-    else pageData = data
-    res.render('index', { pageData })
+    if(error) {
+        pageData = []
+        error = true
+    }
+    else{
+        pageData = data.articles
+        error = false
+    }
+    res.render('index', { pageData, error })
   })  
 })
 

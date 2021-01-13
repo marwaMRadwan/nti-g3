@@ -1,6 +1,7 @@
 const path = require('path')
 const hbs = require('hbs')
 const express = require('express')
+const getapidata = require('./utils/getapidata')
 
 const app = express()
 
@@ -13,5 +14,14 @@ app.set('views', viewsDirectory)
 hbs.registerPartials(partialsDirectory)
 
 app.use(express.static(publicDirectory))
+
+app.get('', (req, res)=>{
+  getapidata( ( error , data ) => {
+    if(error) pageData = error
+    else pageData = data
+    res.render('index', { pageData })
+  })  
+})
+
 
 app.listen(3000)

@@ -5,15 +5,29 @@ const getAllData = (cb) => {
 
     request({ url, json:true }, (err, data) => {
         if(err){
+             cb('server error', undefined)
+        }
+        else{
+          cb(undefined, data.body)
+        }
+    })
+}
+
+const getSingle = (postId, cb) =>{
+    const url = `https://jsonplaceholder.typicode.com/posts/${postId}`
+    request({ url, json:true }, (err, data) => {
+        if(err){
             cb('server error', undefined)
         }
         else{
             cb(undefined, data.body)
+
         }
     })
 }
-const getSingle = (postId, cb) =>{
-    const url = `https://jsonplaceholder.typicode.com/posts/${postId}`
+
+const getComments = (postId, cb) =>{
+    const url = `https://jsonplaceholder.typicode.com/posts/${postId}/comments`
     request({ url, json:true }, (err, data) => {
         if(err){
             cb('server error', undefined)
@@ -24,4 +38,4 @@ const getSingle = (postId, cb) =>{
     })
 }
 
-module.exports = {getAllData, getSingle}
+module.exports = {getAllData, getSingle, getComments}

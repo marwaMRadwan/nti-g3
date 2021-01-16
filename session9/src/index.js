@@ -28,9 +28,8 @@ app.get('', (req, res)=>{
     })
 } )
 
-
-app.get('/id', (req, res)=>{
-    apidata.getSingle(1, (err, apiResponse)=>{
+app.get('/:id', (req, res)=>{
+    apidata.getSingle(req.params.id, async(err, apiResponse)=>{
         if(!err){
             flag = false
             mydata = apiResponse
@@ -39,7 +38,7 @@ app.get('/id', (req, res)=>{
             flag=true
             mydata = []
         }
-        console.log(mydata)
+        
         res.render('single', {mydata})
     })
 } )

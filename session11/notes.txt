@@ -1,0 +1,34 @@
+user =>
+    name
+    age
+    email
+    password
+
+books=>
+    author
+    name
+    date
+ ---------------------------------------
+ functions
+ user => register, login, logout, edit profile, show profile, show his books
+
+ books=> user can add one, edit , show
+
+ libraries
+ - mongoose
+ - express
+ - bcryptjs => encryption password
+ - validation
+ - jsonwebtoken
+
+ ---------------------------------------------------------------
+main folder:
+    - nodemodule,package, packageLock
+    - db connection => mongoose.js
+    - models => db files => user.js, books.js
+    - routes => user.js, books.js
+    - app.js
+
+
+
+

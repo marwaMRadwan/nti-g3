@@ -32,3 +32,12 @@ main folder:
 
 
 
+///note
+
+x.then((y)=>{
+    y.then((z)=>{
+        z.then
+    })
+})
+y = await x
+z= await y

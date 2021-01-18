@@ -1,0 +1,6 @@
+- encrypt password //1234
+- login => email, password => add book 
+- authorized middleware 
+- logout
+- realtion
+- cascade relation

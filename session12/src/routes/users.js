@@ -5,10 +5,11 @@ router.post('/user/add', async (req,res) => {
     const user = new userModel(req.body)
     try{
         await user.save()
+        const token = await user.generateToken()
         res.send({
             status: 1,
             message:'data inserted successfuly',
-            data: user
+            data: {user, token}
         })
     }
     catch(e){
@@ -122,11 +123,12 @@ router.delete('/user/delete/:userid', async(req,res)=>{
 router.post('/user/login', async(req, res)=>{
 
     try{
-        const user = await userModel.findLogin(user1.email, user1.password)
+        const user = await userModel.findLogin(req.body.email, req.body.password)
+        const token = await user.generateToken()
         res.send({
             status:1,
             message: 'user founded',
-            data: user
+            data: {user, token}
         })
     }
     catch(e){

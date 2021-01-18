@@ -44,5 +44,13 @@ UserSchema.pre('save', async function(next){
     next()
 })
 
+UserSchema.statics.findLogin = async (email, password) =>{
+    const user = await User.findOne({email})
+    if(!user) throw new Error('invalid email')
+    flag = await bcrypt.compare(password, user.password)
+    if(!flag) throw new Error('invalid pass')
+    return user
+}
+
 const User = mongoose.model('User', UserSchema)
 module.exports = User

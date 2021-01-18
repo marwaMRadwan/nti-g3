@@ -119,4 +119,23 @@ router.delete('/user/delete/:userid', async(req,res)=>{
     }
 })
 
+router.post('/user/login', async(req, res)=>{
+
+    try{
+        const user = await userModel.findLogin(user1.email, user1.password)
+        res.send({
+            status:1,
+            message: 'user founded',
+            data: user
+        })
+    }
+    catch(e){
+        res.send({
+            status: 0,
+            message:'invalid login',
+            data:e
+        })
+    }
+})
+
 module.exports = router

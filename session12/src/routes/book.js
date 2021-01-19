@@ -50,5 +50,23 @@ router.get('/book/mybook/:id',auth, async(req,res)=>{
         })
     }
 })
-
+ 
+router.patch('/book/:id',auth, async(req,res)=>{
+    avl = ['name','date']
+    requpdates = Object.keys(req.body)
+    isAvl = requpdates.every((update)=>avl.includes(update))
+    if(!isAvl) res.send('not available')
+    try{
+        const book = await bookModel.findOne({_id:req.params.id, author: req.user._id})
+        if(!book) res.send('not found')
+        requpdates.forEach(el =>{
+            book[el] = req.body[el]
+        })
+        await book.save()
+        res.send('updated')
+    }
+    catch(e){
+        res.send(e)
+    }
+})
 module.exports = router

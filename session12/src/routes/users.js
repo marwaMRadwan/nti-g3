@@ -143,4 +143,48 @@ router.post('/user/login', async(req, res)=>{
     }
 })
 
+router.get('/user/profile', auth, async(req,res)=>{
+    res.send({
+        status:1,
+        data:req.user,
+        message:"data retreived"
+    })
+})
+
+router.post('/user/logout',auth, async(req,res)=>{
+    try{
+        req.user.tokens = req.user.tokens.filter((token)=>{
+            return token.token !== req.token
+        })
+        await req.user.save()
+        res.send({
+            status:1,
+            message:"logged out"
+        })
+    }
+    catch(e){
+        res.send({
+            status:0,
+            message:"cann't logout"
+        })
+    }
+})
+
+router.post('/user/logoutall',auth, async(req,res)=>{
+    try{
+        req.user.tokens = []
+        await req.user.save()
+        res.send({
+            status:1,
+            message:'logged out'
+        })
+    }
+    catch(e){
+        res.send({
+            status:0,
+            message:"cann't logout"
+        })
+    }
+})
+
 module.exports = router

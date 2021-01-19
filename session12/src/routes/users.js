@@ -1,6 +1,7 @@
 const express=require('express')
 const userModel = require('../models/users')
 const router = new express.Router()
+const auth = require('../middleware/authorization')
 router.post('/user/add', async (req,res) => {
     const user = new userModel(req.body)
     try{
@@ -21,8 +22,9 @@ router.post('/user/add', async (req,res) => {
     }
 })
 
-router.get('/user/showAll', async(req,res)=>{
+router.get('/user/showAll',auth, async(req,res)=>{
     try{
+        console.log('inside route')
          alldata = await userModel.find({})
             res.send({
                 status:1,
@@ -30,7 +32,8 @@ router.get('/user/showAll', async(req,res)=>{
                 data: alldata
             })
     }
-    catch(e){
+    catch(e){const auth = require('../middleware/authorization')
+
         res.send({
             status:0,
             message: 'data retreving error',
@@ -39,7 +42,7 @@ router.get('/user/showAll', async(req,res)=>{
     }
 })
 
-router.get('/user/single/:userid', async(req,res)=>{
+router.get('/user/single/:userid',auth, async(req,res)=>{
     userid = req.params.userid
     try{
         userData = await userModel.findById(userid)
@@ -65,7 +68,7 @@ router.get('/user/single/:userid', async(req,res)=>{
    
 })
 
-router.patch('/user/edit/:userid', async(req,res)=>{
+router.patch('/user/edit/:userid',auth, async(req,res)=>{
     avlUpdates = ["name", "age"]
     const keys = Object.keys(req.body) // [name]
     const flag = keys.every((k)=> avlUpdates.includes(k))  //name true 
@@ -100,7 +103,7 @@ router.patch('/user/edit/:userid', async(req,res)=>{
     }
 })
 
-router.delete('/user/delete/:userid', async(req,res)=>{
+router.delete('/user/delete/:userid',auth, async(req,res)=>{
     try{
         const user = await userModel.findByIdAndDelete(req.params.userid)
         if(!user) return res.send({

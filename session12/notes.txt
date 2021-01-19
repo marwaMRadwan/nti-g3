@@ -4,3 +4,27 @@
 - logout
 - realtion
 - cascade relation
+
+books => وهمى
+{
+    _id:5,
+    name:marwa,
+    email:"@,
+    pass:12,
+    books:[
+        book:{
+            _id:3
+            author:5,
+            name:'a
+        },
+        book:{
+            _id:4,
+            author:5,
+            name:'a
+        },
+        book:{
+            author:5,
+            name:'a
+        }
+    ]
+}

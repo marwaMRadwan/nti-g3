@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const bookModel = require('./book')
 const UserSchema = new mongoose.Schema({
     name:{ 
         type: String,
@@ -39,12 +40,32 @@ const UserSchema = new mongoose.Schema({
         }
     }]
 })
+UserSchema.virtual('books',{
+    ref:'Book',
+    localField:'_id',
+    foreignField:'author'
+})
+
+UserSchema.methods.toJSON = function(){
+    const user = this.toObject()
+    delete user.password
+    delete user.tokens
+    delete user._id
+    delete user.__v
+    return user
+}
 
 UserSchema.pre('save', async function(next){
     const userData = this
     if(userData.isModified('password')){
         userData.password = await bcrypt.hash(userData.password, 15)
     }
+    next()
+})
+
+UserSchema.pre('remove', async function(next){
+    const user= this
+    await bookModel.deleteMany({author: user._id})
     next()
 })
 

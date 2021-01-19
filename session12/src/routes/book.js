@@ -1,9 +1,54 @@
 const express=require('express')
 const bookModel = require('../models/book')
+auth= require('../middleware/authorization')
 const router = new express.Router()
 //for logic
-router.get('/testbook', (req, res) => {
-    res.send('test')
+router.post('/book/add',auth, async(req,res)=>{
+    bookData = new bookModel({
+        ...req.body,
+        author: req.user._id
+    })
+    try{
+        await bookData.save()
+        res.send({
+            status:1,
+            message:'added', 
+            data: bookData
+        })
+    }
+    catch(e){
+        res.send({
+            status:0,
+            message:'error adding',
+            data:e
+        })
+    }
+})
+
+router.get('/book/me', auth,async(req,res)=>{
+    // data = await bookModel.find({author:req.user._id})
+    // res.send(data)
+    try{
+        await req.user.populate('books').execPopulate()
+        res.send(req.user.books)
+    }
+    catch(e){res.send({status:0, data:e})}
+
+})
+
+router.get('/book/mybook/:id',auth, async(req,res)=>{
+    const _id = req.params.id
+    try{
+        const book = await bookModel.find({_id, author:req.user._id})
+        if(!book) res.send('book not found')
+        else res.send(book)
+    }
+    catch(e){
+        res.send({
+            status:0,
+            data:e
+        })
+    }
 })
 
 module.exports = router

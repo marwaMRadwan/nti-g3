@@ -153,8 +153,8 @@ router.get('/user/profile', auth, async(req,res)=>{
 
 router.post('/user/logout',auth, async(req,res)=>{
     try{
-        req.user.tokens = req.user.tokens.filter((token)=>{
-            return token.token !== req.token
+        req.user.tokens = req.user.tokens.filter((singletoken)=>{
+            return singletoken.token !== req.token
         })
         await req.user.save()
         res.send({

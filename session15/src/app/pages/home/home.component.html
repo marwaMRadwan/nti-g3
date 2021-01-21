@@ -8,7 +8,9 @@
         <th>phone</th>
     </thead>
     <tbody>
-        <tr *ngFor = "let user of users; index as i">
+        <tr *ngFor = "let user of users; index as i; 
+        let o=odd; let e = even"
+        [ngClass]=" { odd:o , even:e } ">
             <td>{{i}}</td>
             <td>{{user.id}}</td>
             <td>{{user.name}}</td>

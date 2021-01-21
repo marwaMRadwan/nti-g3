@@ -1,1 +1,33 @@
-<p>about works!</p>
+<div class="container text-center">
+    <input class="form-control col-6" [(ngModel)]="d">
+    <div [ngSwitch]="d">
+        <div *ngSwitchCase="1">jan</div>
+        <div *ngSwitchCase="2">feb</div>
+        <div *ngSwitchCase="3">mar</div>
+        <div *ngSwitchCase="4">apr</div>
+        <div *ngSwitchCase="5">may</div>
+        <div *ngSwitchCase="6">jun</div>
+        <div *ngSwitchCase="7">jul</div>
+        <div *ngSwitchCase="8">aug</div>
+        <div *ngSwitchCase="9">sep</div>
+        <div *ngSwitchCase="10">oct</div>
+        <div *ngSwitchCase="11">nov</div>
+        <div *ngSwitchCase="12">dec</div>
+        <div *ngSwitchDefault>error</div>
+    </div>
+</div>
+
+<div class="container border border-2" *ngIf="d==5; else myElse">
+    x =5
+</div>
+<ng-template #myElse>
+    <div>
+        x not equal 5
+    </div>
+</ng-template>
+
+
+
+
+
+

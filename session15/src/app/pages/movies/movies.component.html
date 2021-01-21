@@ -1,0 +1,10 @@
+<section class="container row justify-content-center">
+    <article class="col-3 m-3 border border-2" *ngFor="let a of myMoviesData">
+     <h3>{{a.title}}</h3>
+     <img class="img-fluid" [src]="a.posterurl">
+     <div *ngFor="let x of a.genres">
+        {{x}}
+     </div>
+     <button class="btn btn-success" routerLink="{{a.id}}">read more</button>
+    </article>
+</section>

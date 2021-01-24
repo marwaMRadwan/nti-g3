@@ -1,0 +1,37 @@
+<section class="m-5 container">
+    <!--first name, last name, email, gender, martial status, phone, country-->
+    {{register.value|json}}
+<!-- {{formData|json}} -->
+    <form #register="ngForm" (ngSubmit)="submitMe(register)">
+    <div class="mb-3">
+      <label class="form-label">First Name</label>
+      <input class="form-control" id="firstname" name="fname" ngModel>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">last Name</label>
+        <input class="form-control" id="lastname" name="lname" ngModel>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input class="form-control" id="email" name="emails" ngModel>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">gender</label>
+        <input type="radio" value="male" class="form-check-input" id="gen" name="gender" ngModel> Male
+        <input type="radio" value="Female" class="form-check-input" id="gen" name="gender" ngModel> Female
+      </div>
+      <div class="mb-3">
+        <label class="form-label">phone</label>
+        <input class="form-control" id="phone" name="phones" ngModel>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Country</label>
+        <select class="form-select" aria-label="Default select example"  name="country" ngModel>
+            <option selected disabled>Open this select menu</option>
+            <option *ngFor="let c of countries" [ngValue]='c'>{{c}}</option>
+          </select>
+      </div>
+              
+    <button class="btn btn-primary">Add</button>
+  </form>
+</section>

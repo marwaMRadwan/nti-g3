@@ -6,7 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./templateform.component.css']
 })
 export class TemplateformComponent implements OnInit {
-  formData 
+
+  formData ={
+    fname:"",
+    lname:"",
+    emails: "",
+    gender: "", 
+    phones: "", 
+    country: "", 
+    address: { 
+      street: "", 
+      buildingNo: "" 
+    },
+    type:1
+  }
   countries = ['egypt', 'plastine', 'canda', 'saudia', 'iraq', 'jordon']
 
   constructor() { }
@@ -14,9 +27,13 @@ export class TemplateformComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitMe(data){
-    console.log(data.value)
-    this.formData = data.value
+  submitMe(register){
+    if(register.valid){
+console.log(this.formData)
+    }
+    else{
+      console.log('error')
+    }
   }
 
 }

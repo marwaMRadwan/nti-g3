@@ -1,37 +1,49 @@
 <section class="m-5 container">
     <!--first name, last name, email, gender, martial status, phone, country-->
+    <!-- <ng-container *ngIf="register.submitted">
     {{register.value|json}}
+</ng-container> -->
+    <!-- {{register.submitted}} -->
 <!-- {{formData|json}} -->
+
+{{register.valid}}
     <form #register="ngForm" (ngSubmit)="submitMe(register)">
     <div class="mb-3">
       <label class="form-label">First Name</label>
-      <input class="form-control" id="firstname" name="fname" ngModel>
+      <input class="form-control" id="firstname" name="fname" #fname="ngModel" [(ngModel)]="formData.fname" required minlength=5 maxlength=12 pattern="^[a-zA-Z]+$" email>
+      <!-- {{fname.value}} - {{fname.value.length}} -->
+      <div *ngIf="fname.invalid && (fname.dirty || fname.touched)">
+          {{fname.errors|json}}
+      </div>
     </div>
     <div class="mb-3">
         <label class="form-label">last Name</label>
-        <input class="form-control" id="lastname" name="lname" ngModel>
+        <input class="form-control" id="lastname" name="lname" [(ngModel)]="formData.lname">
       </div>
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input class="form-control" id="email" name="emails" ngModel>
+        <input class="form-control" id="email" name="emails" [(ngModel)]="formData.emails">
       </div>
       <div class="mb-3">
         <label class="form-label">gender</label>
-        <input type="radio" value="male" class="form-check-input" id="gen" name="gender" ngModel> Male
-        <input type="radio" value="Female" class="form-check-input" id="gen" name="gender" ngModel> Female
+        <input type="radio" value="male" class="form-check-input" id="gen" name="gender" [(ngModel)]="formData.gender"> Male
+        <input type="radio" value="Female" class="form-check-input" id="gen" name="gender" [(ngModel)]="formData.gender"> Female
       </div>
       <div class="mb-3">
         <label class="form-label">phone</label>
-        <input class="form-control" id="phone" name="phones" ngModel>
+        <input class="form-control" id="phone" name="phones" [(ngModel)]="formData.phones">
       </div>
       <div class="mb-3">
         <label class="form-label">Country</label>
-        <select class="form-select" aria-label="Default select example"  name="country" ngModel>
+        <select class="form-select" aria-label="Default select example"  name="country" [(ngModel)]="formData.country">
             <option selected disabled>Open this select menu</option>
             <option *ngFor="let c of countries" [ngValue]='c'>{{c}}</option>
           </select>
       </div>
-              
-    <button class="btn btn-primary">Add</button>
+        <div ngModelGroup='address'>
+            <input class="form-control" id="street" name="street" [(ngModel)]="formData.address.street">
+            <input class="form-control" id="bNo" name="buildingNo" [(ngModel)]="formData.address.buildingNo">
+        </div>
+    <button class="btn btn-primary" [disabled]="!register.valid">Add</button>
   </form>
 </section>

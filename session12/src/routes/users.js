@@ -22,7 +22,7 @@ router.post('/user/add', async (req,res) => {
     }
 })
 
-router.get('/user/showAll',auth, async(req,res)=>{
+router.get('/user/showAll', async(req,res)=>{
     try{
         console.log('inside route')
          alldata = await userModel.find({})

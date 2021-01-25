@@ -13,15 +13,19 @@ export class RegisterComponent implements OnInit {
     email:"",
     password:""
   }
+  message=""
+  flagRegister = false
   constructor(private _user:UserService) { }
 
   ngOnInit(): void {
   }
 
+
   handleRegister(){
-// console.log(this.user)
   this._user.register(this.user).subscribe(data=>{
     console.log(data)
+    this.flagRegister= data.status
+    this.message= data.message
   })
   }
 }

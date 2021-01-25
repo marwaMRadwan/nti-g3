@@ -1,5 +1,9 @@
 <section class="m-5">
+
     <h2>register works!</h2>
+    
+    <h3 class="alert {{flagRegister?'alert-success':'alert-danger'}}"
+     *ngIf="message!=''">{{message}}</h3>
     <form #register="ngForm" (ngSubmit)="handleRegister()">
         <div>
             <input class="form-control my-2" name="name" [(ngModel)] ='user.name' required minlength=2 maxlength=20 placeholder="name" #fname="ngModel">

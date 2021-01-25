@@ -5,14 +5,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-
+  baseURL:string = 'http://localhost:3000/'
   constructor(private _http: HttpClient) { }
 
   register(userData):Observable<any>{
-    return this._http.post(`http://localhost:3000/user/add`,userData)
+    return this._http.post(`${this.baseURL}user/add`,userData)
   }
   allData():Observable<any>{
-    return this._http.get(`http://localhost:3000/user/showAll`)
+    return this._http.get(`${this.baseURL}user/showAll`)
+  }
+  apiData():Observable<any>{
+    return this._http.get(`https://backtest.achilleseg.com/api/ProductsUpdated?lang_id=1&page=0&limit=12`)
   }
   login(){
 

@@ -1,0 +1,18 @@
+<img src='assets/loading.gif' *ngIf="!isloaded">
+
+<table class="table" *ngIf="isloaded">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{product.products_name}}</td>
+            <td>{{product.products_price}}</td>
+            <td>{{product.products_model}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -8,13 +8,19 @@ import { AppComponent } from './app.component';
 import { TemplateformComponent } from './templateform/templateform.component';
 import { RegisterComponent } from './register/register.component';
 import { AllusersComponent } from './allusers/allusers.component';
+import { ProductsComponent } from './products/products.component';
+import { AllPostsComponent } from './pages/all-posts/all-posts.component';
+import { SinglePostComponent } from './pages/single-post/single-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TemplateformComponent,
     RegisterComponent,
-    AllusersComponent
+    AllusersComponent,
+    ProductsComponent,
+    AllPostsComponent,
+    SinglePostComponent
   ],
   imports: [
     BrowserModule,

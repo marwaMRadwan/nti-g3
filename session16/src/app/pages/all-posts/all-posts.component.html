@@ -2,7 +2,7 @@
 <img src="assets/loading.gif" *ngIf="!isLoaded">
 <section class="container my-4" *ngIf="isLoaded">
     <div class="row">
-        <div class="col-3 border border-3" *ngFor="let post of allPosts">
+        <div class="col-3 border border-3" *ngFor="let post of allPosts" routerLink="{{post.id}}">
             <span>{{post.userId}}</span> 
             <h4>{{post.title}}</h4>
             <p>{{post.body}}</p>

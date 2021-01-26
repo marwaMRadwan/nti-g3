@@ -11,6 +11,8 @@ import { AllusersComponent } from './allusers/allusers.component';
 import { ProductsComponent } from './products/products.component';
 import { AllPostsComponent } from './pages/all-posts/all-posts.component';
 import { SinglePostComponent } from './pages/single-post/single-post.component';
+import { PlaygroundComponent } from './playground/playground.component';
+import { Err404Component } from './err404/err404.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SinglePostComponent } from './pages/single-post/single-post.component';
     AllusersComponent,
     ProductsComponent,
     AllPostsComponent,
-    SinglePostComponent
+    SinglePostComponent,
+    PlaygroundComponent,
+    Err404Component
   ],
   imports: [
     BrowserModule,

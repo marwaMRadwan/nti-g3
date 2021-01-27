@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
         unique:true,
         trim:true,
         validate(value){
-            if(!isAlphanumeric(value,['en-US'])){
+            if(!validator.isAlphanumeric(value,['en-US'])){
                 throw new Error('not valid')
             }
         }
@@ -56,13 +56,25 @@ userSchema.methods.toJSON = function(){
 
 userSchema.methods.generateToken = async function(){
     const user = this
+    //{_id:254455555}
     const token = jwt.sign({_id:user._id.toString()}, 'finalProject')
     user.tokens = user.tokens.concat({token})
     return token
 }
 
+userSchema.statics.findByCredintials = async(userName, password)=>{
+    const user = await User.findOne({userName})
+    if(!user) throw new Error('not allowed')
+    const isValidPass = await bcrypt.compare(password, user.password)
+    if(!isValidPass) throw new Error('not allowed')
+    return user
+}
+
 userSchema.pre('save',async function(next){
-    
+    const user = this
+    if(user.isModified('password')){
+        user.password = await bcrypt.hash(user.password, 8)
+    }
 })
 
 const User = mongoose.model('User', userSchema)

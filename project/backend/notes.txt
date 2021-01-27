@@ -23,28 +23,31 @@ for both types
 register =>post - inside body (type) => done
 login => done
 logout => done
-my profile
-edit profile
+my profile => done
+edit profile => done by students
 
 for admin
 ---------
 show all users => done 
-del user, 
-add user, 
-convert user to admin, 
-convert admin to user
-add book, 
-categories, 
-show categories, 
-del categories, 
-edit categories
-show all books, 
-del book
-confirm add
+del user, => done
+add user, => done
+convert user type => done
+add book,
+categories  => done 
+show categories,  => task
+del categories, =>task
+edit categories => task
+show all books, =>task
+del book =>task
+confirm add =>bounce
 
 for user
 --------
-add book, show his own books, edit, delete, filter category
+add book, => done 
+show his own books, 
+edit, 
+delete, 
+filter category
 -----------------------------------------------------------------------------------
 admin
 -----

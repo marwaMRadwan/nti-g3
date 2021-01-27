@@ -91,4 +91,39 @@ router.get('/user/me',generalAuth, async(req, res)=>{
         res.send({status:0, data:{error}, message:"error loadin profile"})
     }
 })
+
+router.delete('/user/delete/me', generalAuth,async(req,res)=>{
+    try{ 
+        await req.user.remove()
+        res.send('removed')
+    }
+    catch(error){res.send(error)}
+})
+
+router.delete('/admin/delete/:userId', adminAuth, async(req,res)=>{
+    try{
+    const userId = req.params.userId
+    const user= await User.findOne({_id:userId})
+    if(!user) throw new Error('user not found')
+    await user.remove()
+    res.send('removed')
+    }
+    catch(error){
+        res.send(error)
+    }
+})
+
+router.post('/admin/editType/:userId', adminAuth, async(req,res)=>{
+    try{
+        const userId = req.params.userId
+        const user= await User.findOne({_id:userId})
+        if(!user) throw new Error('user not found')
+        user.userType = !user.userType
+        await user.save()
+        res.send('EDITED')
+        }
+        catch(error){
+            res.send(error)
+        }
+})
 module.exports = router

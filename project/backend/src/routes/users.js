@@ -2,6 +2,7 @@ const express = require('express')
 const User = require('../models/users')
 const userAuth = require('../middleware/authUser')
 const adminAuth = require('../middleware/authAdmin')
+const generalAuth = require('../middleware/authGeneral')
 const router = new express.Router()
 
 router.post('/user/register', async(req, res)=>{
@@ -58,5 +59,36 @@ router.get('/admin/showAll', adminAuth, async(req,res)=>{
             data:{error}, message:"error loading data"
         })
     }    
+})
+
+router.post('/user/logout',generalAuth, async(req,res)=>{
+    try{
+        req.user.tokens=[]
+        await req.user.save()
+        res.send({
+            status:1,
+            data:{},
+            message:'logged out successfuly'
+        })
+    }
+    catch(error){
+        res.status(500).send({
+            status:0,
+            data:{error},
+            message:"error logout user"
+        })
+    }
+})
+router.get('/user/me',generalAuth, async(req, res)=>{
+    try{
+        res.send({
+            status:1,
+            data:{'req.user':req.user},
+            message:"retrived"
+        })    
+    }
+    catch(error){
+        res.send({status:0, data:{error}, message:"error loadin profile"})
+    }
 })
 module.exports = router

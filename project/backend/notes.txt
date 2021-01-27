@@ -20,17 +20,26 @@ Apis
 ----
 for both types
 --------------
-register =>post - inside body (type)
-login
-logout
+register =>post - inside body (type) => done
+login => done
+logout => done
 my profile
 edit profile
 
 for admin
 ---------
-show all users, del user, add user, convert user to admin, convert admin to user
-add book, categories, show categories, del categories, edit categories
-show all books, del book
+show all users => done 
+del user, 
+add user, 
+convert user to admin, 
+convert admin to user
+add book, 
+categories, 
+show categories, 
+del categories, 
+edit categories
+show all books, 
+del book
 confirm add
 
 for user
@@ -39,7 +48,7 @@ add book, show his own books, edit, delete, filter category
 -----------------------------------------------------------------------------------
 admin
 -----
-- login 
+- login
 - add admin
 - show all books => confirm, delete
 - edit book

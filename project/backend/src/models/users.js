@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     phone:{
         type:String,
         required:true,
-        trim:unique
+        trim:true
     },
     age:{
         type:Number
@@ -48,9 +48,9 @@ userSchema.virtual('userBooks',{
 userSchema.methods.toJSON = function(){
     const user = this
     userObject = user.toObject()
-    delete userObject._id
-    delete userObject.tokens
-    delete userObject.password
+    // delete userObject._id
+    // delete userObject.tokens
+    // delete userObject.password
     return userObject
 }
 
@@ -59,6 +59,7 @@ userSchema.methods.generateToken = async function(){
     //{_id:254455555}
     const token = jwt.sign({_id:user._id.toString()}, 'finalProject')
     user.tokens = user.tokens.concat({token})
+    await user.save()
     return token
 }
 

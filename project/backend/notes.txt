@@ -66,9 +66,6 @@ custom on number of book => clinic
 
 
 
-cart 
-1 4 5
-2 4 10
-3 4 14
-order
-1 [1,2,3] 4
+user => name, .....
+flight=> name, dest, .....
+booking => _id, user, flight

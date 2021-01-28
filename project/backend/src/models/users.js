@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({
         type:Number
     },
     image:{
-        type:String
+        type:String,
+        default:"-"
     },
     password:{
         type:String, trim:true, required:true

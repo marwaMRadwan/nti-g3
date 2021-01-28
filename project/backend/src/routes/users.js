@@ -3,11 +3,33 @@ const User = require('../models/users')
 const userAuth = require('../middleware/authUser')
 const adminAuth = require('../middleware/authAdmin')
 const generalAuth = require('../middleware/authGeneral')
+const multer = require('multer')
 const router = new express.Router()
-
-router.post('/user/register', async(req, res)=>{
+var uniqueImageName
+var storage = multer.diskStorage({
+    destination: function(req,file, cb){
+        cb(null,'images')
+    },
+    limits:{fileSize:147852222},
+    fileFilter:function(req, file,cb){
+        if(!file.originalname.match(/\.(jpg|png|pdf)$/)){
+            return cb(new Error('invalid extension'))
+        }
+    },
+    filename: function(req,file,cb){
+        uniqueImageName = 'userImg' + '-' +Date.now()+ 
+        (file.originalname.match(/\.(jpg|png|pdf)$/)[0])
+        cb(null,uniqueImageName)
+    }
+})
+var upload = multer({storage})
+router.post('/up', upload.single('upload'), async(req,res)=>{
+    res.send('done')
+})
+router.post('/user/register',upload.single('profile'), async(req, res)=>{
     const user = new User(req.body)
     try{
+        user.image = `images/${uniqueImageName}`
         await user.save()
         const token = await user.generateToken()
         res.status(200).send({

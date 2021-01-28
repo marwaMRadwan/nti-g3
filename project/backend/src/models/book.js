@@ -27,9 +27,26 @@ const bookSchema = new mongoose.Schema({
         validate(value){
             if(value<60) throw new Error('Book must be more than 60 papers')
         }
+    },
+    status:{
+        default:false,
+        type: Boolean
     }
 },
 {timestamps:true}
 )
+
+// bookSchema.pre('save', async function(req, res, next){
+// try{
+//     console.log(1)
+//     book = this 
+//     user = req.user
+//     console.log(user)
+// }
+// catch(e){
+//     console.log(e)
+// }
+//     next()
+// })
 const Book = mongoose.model('Book', bookSchema)
 module.exports= Book
